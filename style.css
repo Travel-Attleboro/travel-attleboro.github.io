@@ -1,0 +1,269 @@
+:root {
+    --bg: #f6f4ef;
+    --fg: #1d1d1b;
+    --card-bg: #ffffff;
+    --border-color: #d8d5cc;
+    --muted: #6b6a66;
+
+    --green: #4caf6a;
+    --yellow: #e8b94a;
+    --red: #d9634f;
+    --accent: #3b6fd4;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #161615;
+        --fg: #eceae4;
+        --card-bg: #222220;
+        --border-color: #34332f;
+        --muted: #9a988f;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.game-container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+}
+
+.game-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.control-row label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.route-targets {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.arrow {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.status-text {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 8px 0 0;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.suggestions-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+    z-index: 2000;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.suggestions-menu li {
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--fg);
+    list-style-type: none;
+}
+
+.suggestions-menu li:hover,
+.suggestions-menu li.active {
+    background-color: rgba(125, 125, 125, 0.2);
+}
+
+.map-view {
+    height: 320px;
+    border-radius: var(--radius-sm);
+    background: #2a2a28;
+    margin-top: 14px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+input,
+select {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--card-bg);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+}
+
+button {
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: var(--fg);
+    color: var(--bg);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.action-footer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: rgba(125, 125, 125, 0.1);
+}
+
+.map-view {
+    height: 320px;
+    border-radius: var(--radius-sm);
+    background: #2a2a28;
+    margin-top: 14px;
+    border: 1px solid var(--border-color);
+}
+
+.feedback-text {
+    min-height: 20px;
+    margin: 10px 0 2px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--red);
+}
+
+.solution-text {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 4px 0 0;
+    word-break: break-word;
+}
+
+.chip-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    color: #111111;
+    font-size: 0.9rem;
+}
+
+.chip strong {
+    font-weight: 600;
+}
+
+.chip small {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.chip.green {
+    background-color: var(--green);
+}
+
+.chip.yellow {
+    background-color: var(--yellow);
+}
+
+.chip.red {
+    background-color: var(--red);
+}

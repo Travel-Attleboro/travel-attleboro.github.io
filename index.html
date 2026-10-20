@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Travel Attleboro</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="game-container">
+        <header class="game-header">
+            <h1>Travel Attleboro</h1>
+            <p class="subtitle">Connect the two streets using the fewest streets you can.</p>
+
+            <div class="control-row">
+                <label for="difficulty-select">Road Pool:</label>
+                <select id="difficulty-select">
+                    <option value="easy" selected>Main Roads Only</option>
+                    <option value="all">All Roads (Includes obscure streets)</option>
+                </select>
+            </div>
+        </header>
+
+        <section class="card status-card" aria-live="polite">
+            <div class="route-targets">
+                <span id="start-street" class="street-target"></span>
+                <span class="arrow">&rarr;</span>
+                <span id="end-street" class="street-target"></span>
+            </div>
+            <p id="game-status" class="status-text"></p>
+        </section>
+
+        <section class="card play-card">
+            <form id="guess-form" class="input-row">
+                <div class="input-wrapper">
+                    <input id="guess-input" type="text" placeholder="Type a street name..." autocomplete="off" required>
+                    <ul id="suggestions-menu" class="suggestions-menu" hidden></ul>
+                </div>
+                <button id="guess-button" type="submit">Guess</button>
+            </form>
+
+            <div id="map" class="map-view" role="region" aria-label="Attleboro Street Map"></div>
+
+            <p id="feedback-message" class="feedback-text" role="alert"></p>
+            <p id="solution-path" class="solution-text"></p>
+            <div id="guess-history" class="chip-container"></div>
+        </section>
+
+        <footer class="action-footer">
+            <button id="daily-button" class="btn-secondary" type="button">Daily Puzzle</button>
+            <button id="random-button" class="btn-secondary" type="button">Random Puzzle</button>
+            <button id="share-button" class="btn-secondary" type="button" hidden>Copy Result</button>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="graph.js"></script>
+    <script src="geometry.js"></script>
+    <script src="engine.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
