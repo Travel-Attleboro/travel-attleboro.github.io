@@ -80,6 +80,8 @@ body {
     font-weight: 700;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     flex-wrap: wrap;
     gap: 8px;
 }
@@ -93,6 +95,7 @@ body {
     color: var(--muted);
     font-size: 0.9rem;
     margin: 8px 0 0;
+    text-align: center;
 }
 
 .input-row {

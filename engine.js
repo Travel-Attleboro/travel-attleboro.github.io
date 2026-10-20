@@ -86,8 +86,8 @@ function getAvailableStreets(graph, duplicates = [], difficulty = "easy") {
 
 function createPuzzle(graph, randomFn, difficulty = "easy") {
   const availableStreets = getAvailableStreets(graph, difficulty);
-  const maxConnections = difficulty === "easy" ? 5 : 6;
-  const minConnections = 3;
+  const minConnections = difficulty === "easy" ? 4 : 5;
+  const maxConnections = difficulty === "easy" ? 6 : 8;
 
   while (true) {
     const startIndex = Math.floor(randomFn() * availableStreets.length);
