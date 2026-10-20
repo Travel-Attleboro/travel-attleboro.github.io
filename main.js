@@ -26,17 +26,28 @@ const dailyButton = document.getElementById("daily-button");
 const randomButton = document.getElementById("random-button");
 const shareButton = document.getElementById("share-button");
 
-const map = L.map("map", { minZoom: 11, maxZoom: 19 });
+const attleboroBounds = [
+    [41.870, -71.405],
+    [42.010, -71.195],
+];
+
+const map = L.map("map", {
+    minZoom: 12,
+    maxZoom: 19,
+    maxBounds: attleboroBounds,
+    maxBoundsViscosity: 1.0,
+});
+
 map.attributionControl.addAttribution("Street data &copy; OpenStreetMap");
-map.fitBounds([[41.889, -71.382], [41.991, -71.218]]);
+map.fitBounds(attleboroBounds);
 
 const baseStreetLayer = L.layerGroup().addTo(map);
 if (typeof GEOMETRY !== "undefined") {
     for (const name of Object.keys(GEOMETRY)) {
         L.polyline(GEOMETRY[name], {
-            color: "#555555",
+            color: "#9c9a92",
             weight: 1.5,
-            opacity: 0.45,
+            opacity: 0.75,
             interactive: false,
         }).addTo(baseStreetLayer);
     }
@@ -51,7 +62,7 @@ function renderStreet(name, color, permanentLabel = false) {
 
     const polyline = L.polyline(GEOMETRY[name], {
         color: color,
-        weight: 5,
+        weight: 7,
         opacity: 0.9,
     }).addTo(activeStreetLayer);
 
@@ -194,10 +205,7 @@ guessForm.addEventListener("submit", (e) => {
                 ? "#e8b94a"
                 : "#d9634f";
 
-    const line = renderStreet(evaluation.name, streetColor);
-    if (line && !map.getBounds().contains(line.getBounds())) {
-        map.panTo(line.getBounds().getCenter(), { animate: true });
-    }
+    renderStreet(evaluation.name, streetColor);
 
     guessInput.value = "";
     updateStatusCard();

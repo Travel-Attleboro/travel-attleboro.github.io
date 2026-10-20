@@ -174,7 +174,7 @@ input {
 .map-view {
     height: 320px;
     border-radius: var(--radius-sm);
-    background: #2a2a28;
+    background: #111110;
     margin-top: 14px;
     border: 1px solid var(--border-color);
     position: relative;

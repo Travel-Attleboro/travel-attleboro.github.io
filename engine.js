@@ -84,10 +84,10 @@ function getAvailableStreets(graph, duplicates = [], difficulty = "easy") {
   return allStreets.filter(name => isMajorRoad(graph, name));
 }
 
-function createPuzzle(graph, randomFn, difficulty = "easy") {
-  const availableStreets = getAvailableStreets(graph, difficulty);
-  const minConnections = difficulty === "easy" ? 4 : 5;
-  const maxConnections = difficulty === "easy" ? 6 : 8;
+function createPuzzle(graph, randomFn, duplicates = [], difficulty = "easy") {
+  const availableStreets = getAvailableStreets(graph, duplicates, difficulty);
+  const minConnections = difficulty === "easy" ? 4 : 6;
+  const maxConnections = difficulty === "easy" ? 7 : 13;
 
   while (true) {
     const startIndex = Math.floor(randomFn() * availableStreets.length);
@@ -113,21 +113,21 @@ function createPuzzle(graph, randomFn, difficulty = "easy") {
 }
 
 function findShortestRoute(graph, puzzle, fromEnd) {
-    const route = [puzzle.start];
-    let current = puzzle.start;
+  const route = [puzzle.start];
+  let current = puzzle.start;
 
-    while (current !== puzzle.end) {
-        const neighbors = graph[current] || [];
-        
-        current = neighbors.find(next => fromEnd[next] === fromEnd[current] - 1);
-        if (!current) {
-            break;
-        }
+  while (current !== puzzle.end) {
+    const neighbors = graph[current] || [];
 
-        route.push(current);
+    current = neighbors.find(next => fromEnd[next] === fromEnd[current] - 1);
+    if (!current) {
+      break;
     }
 
-    return route;
+    route.push(current);
+  }
+
+  return route;
 }
 
 function isConnected(graph, puzzle, state) {
@@ -160,36 +160,36 @@ function isConnected(graph, puzzle, state) {
 }
 
 function evaluateGuess(inputName, puzzle, state, graph, lookup) {
-    const guessedName = lookup[inputName.trim().toLowerCase()];
-    if (!guessedName || !graph[guessedName]) {
-        return {
-        valid: false,
-        error: "Unknown street name."
-        };
-    }
-
-    const isStartOrEnd = [puzzle.start, puzzle.end].includes(guessedName);
-    const alreadyGuessed = state.guesses.some(g => g.name === guessedName);
-    if (isStartOrEnd || alreadyGuessed) {
-        return {
-        valid: false,
-        error: "Street name already guessed."
-        };
-    }
-
-    const extra = state.fromStart[guessedName] + state.fromEnd[guessedName] - puzzle.hops;
-
-    let color = "red";
-    if (extra === 0) {
-        color = "green";
-    } else if (extra === 1) {
-        color = "yellow";
-    }
-
+  const guessedName = lookup[inputName.trim().toLowerCase()];
+  if (!guessedName || !graph[guessedName]) {
     return {
-        valid: true,
-        name: guessedName,
-        extra: extra,
-        color: color
+      valid: false,
+      error: "Unknown street name."
     };
+  }
+
+  const isStartOrEnd = [puzzle.start, puzzle.end].includes(guessedName);
+  const alreadyGuessed = state.guesses.some(g => g.name === guessedName);
+  if (isStartOrEnd || alreadyGuessed) {
+    return {
+      valid: false,
+      error: "Street name already guessed."
+    };
+  }
+
+  const extra = state.fromStart[guessedName] + state.fromEnd[guessedName] - puzzle.hops;
+
+  let color = "red";
+  if (extra === 0) {
+    color = "green";
+  } else if (extra === 1) {
+    color = "yellow";
+  }
+
+  return {
+    valid: true,
+    name: guessedName,
+    extra: extra,
+    color: color
+  };
 }
