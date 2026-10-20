@@ -331,6 +331,7 @@ function startNewGame(mode = "daily") {
 
     feedbackMessageEl.textContent = "";
     solutionPathEl.textContent = "";
+    guessHistoryEl.textContent = "";
     guessInput.value = "";
     guessInput.disabled = false;
     guessButton.disabled = false;
@@ -349,6 +350,7 @@ function startNewGame(mode = "daily") {
     }
 
     updateStatusCard();
+    renderGuessChips();
     guessInput.focus();
 }
 
