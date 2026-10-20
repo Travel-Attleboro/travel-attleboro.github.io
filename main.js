@@ -45,7 +45,9 @@ if (typeof GEOMETRY !== "undefined") {
 const activeStreetLayer = L.featureGroup().addTo(map);
 
 function renderStreet(name, color, permanentLabel = false) {
-    if (typeof GEOMETRY === "undefined" || !GEOMETRY[name]) return null;
+    if (typeof GEOMETRY === "undefined" || !GEOMETRY[name]) {
+        return null;
+    }
 
     const polyline = L.polyline(GEOMETRY[name], {
         color: color,
@@ -53,7 +55,17 @@ function renderStreet(name, color, permanentLabel = false) {
         opacity: 0.9,
     }).addTo(activeStreetLayer);
 
-    polyline.bindTooltip(name, { permanent: permanentLabel });
+    polyline.bindTooltip(name, {
+        permanent: permanentLabel,
+        sticky: true,
+        direction: "auto",
+        opacity: 0.95
+    });
+
+    polyline.on("click", function (e) {
+        polyline.openTooltip(e.latlng);
+    });
+
     return polyline;
 }
 
