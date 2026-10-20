@@ -98,13 +98,44 @@ body {
 .input-row {
     display: flex;
     gap: 8px;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
 }
 
 .input-wrapper {
     position: relative;
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-size: 1rem;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--card-bg);
+    color: var(--fg);
+    outline: none;
+}
+
+#guess-button {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    white-space: nowrap;
+}
+
+@media (max-width: 360px) {
+    .input-row {
+        flex-direction: column;
+    }
+
+    #guess-button {
+        width: 100%;
+    }
 }
 
 .suggestions-menu {
@@ -193,8 +224,10 @@ select:disabled {
 
 .action-footer {
     display: flex;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
     flex-wrap: wrap;
+    margin-top: 14px;
 }
 
 .btn-secondary {
@@ -266,4 +299,28 @@ select:disabled {
 
 .chip.red {
     background-color: var(--red);
+}
+
+.game-header {
+    text-align: center;
+}
+
+.game-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 14px;
 }

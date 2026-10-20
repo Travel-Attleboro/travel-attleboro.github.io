@@ -13,13 +13,13 @@
     <main class="game-container">
         <header class="game-header">
             <h1>Travel Attleboro</h1>
-            <p class="subtitle">Connect the two streets using the fewest streets you can.</p>
+            <p class="subtitle">Connect the two streets using the amount of fewest streets.</p>
 
             <div class="control-row">
-                <label for="difficulty-select">Road Pool:</label>
+                <label for="difficulty-select">Game Mode:</label>
                 <select id="difficulty-select">
-                    <option value="easy" selected>Main Roads Only</option>
-                    <option value="all">All Roads (Includes obscure streets)</option>
+                    <option value="easy" selected>Main Roads</option>
+                    <option value="all">Every Road</option>
                 </select>
             </div>
         </header>
@@ -36,7 +36,7 @@
         <section class="card play-card">
             <form id="guess-form" class="input-row">
                 <div class="input-wrapper">
-                    <input id="guess-input" type="text" placeholder="Type a street name..." autocomplete="off" required>
+                    <input id="guess-input" type="text" placeholder="Type a street name" autocomplete="off" required>
                     <ul id="suggestions-menu" class="suggestions-menu" hidden></ul>
                 </div>
                 <button id="guess-button" type="submit">Guess</button>
